@@ -1,0 +1,79 @@
+baseURL = 'https://imsyuan.github.io'
+languageCode = 'zh-tw'
+title = 'imsyuan'
+theme = 'PaperMod'
+
+# 語言設定
+defaultContentLanguage = "zh-tw"
+
+# 新版分頁設定
+[pagination]
+pagerSize = 5
+
+[params]
+# 網站基本資訊
+description = "這是 Steven 的部落格"
+author = "Steven"
+defaultTheme = "auto"
+showShareButtons = true
+showReadingTime = true
+showPostNavLinks = true
+showBreadCrumbs = true
+ShowCodeCopyButtons = true
+ShowRssButtonInSectionTermList = true
+ShowToc = true
+
+# 首頁設定
+[params.homeInfoParams]
+Title = "歡迎來到我的部落格 👋"
+Content = """
+這裡是我分享技術文章和心得的地方。
+主要關注 [寫出您感興趣的主題] 等領域。
+"""
+
+# 社交媒體設定（新版寫法）
+[params.social]
+github = "imsyuan"
+email = "您的email"
+
+# PaperMod 主題的社交圖標設定
+[[params.socialIcons]]
+name = "github"
+url = "https://github.com/imsyuan"
+
+#[[params.socialIcons]]
+#name = "email"
+#url = "mailto:您的email"
+
+# 選單設定
+[[menu.main]]
+identifier = "posts"
+name = "文章"
+url = "/posts/"
+weight = 10
+
+[[menu.main]]
+identifier = "archives"
+name = "所有文章"
+url = "/archives/"
+weight = 20
+
+[[menu.main]]
+identifier = "search"
+name = "搜尋"
+url = "/search/"
+weight = 30
+
+# 搜尋功能設定
+[outputs]
+home = ["HTML", "RSS", "JSON"]
+
+# 搜尋選項設定
+[params.fuseOpts]
+isCaseSensitive = false
+shouldSort = true
+location = 0
+distance = 1000
+threshold = 0.4
+minMatchCharLength = 0
+keys = ["title", "permalink", "summary", "content"]
