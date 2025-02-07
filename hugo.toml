@@ -15,7 +15,7 @@ pagerSize = 5
 # 網站基本資訊
 description = "這是 Steven 的部落格"
 author = "Steven"
-defaultTheme = "auto"
+defaultTheme = "light"
 showShareButtons = true
 showReadingTime = true
 showPostNavLinks = true
@@ -65,9 +65,20 @@ name = "搜尋"
 url = "/search/"
 weight = 30
 
+[[menu.main]]
+identifier = "tags"
+name = "標籤"
+url = "/tags/"
+weight = 40
+
 # 搜尋功能設定
 [outputs]
 home = ["HTML", "RSS", "JSON"]
+
+[taxonomies]
+tag = "tags"
+category = "categories"
+series = "series"
 
 # 搜尋選項設定
 [params.fuseOpts]
