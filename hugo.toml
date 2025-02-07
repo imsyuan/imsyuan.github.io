@@ -1,4 +1,5 @@
-baseURL = 'https://imsyuan.github.io'
+#baseURL = 'https://imsyuan.github.io'
+baseURL = 'https://blog.mewo.com.tw'
 languageCode = 'zh-tw'
 title = 'imsyuan'
 theme = 'PaperMod'
