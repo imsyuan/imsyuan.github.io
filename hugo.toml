@@ -1,7 +1,7 @@
 #baseURL = 'https://imsyuan.github.io'
 baseURL = 'https://blog.mewo.com.tw'
 languageCode = 'zh-tw'
-title = 'imsyuan'
+title = "Steven Chang's Blog"
 theme = 'PaperMod'
 
 # 語言設定
@@ -23,13 +23,13 @@ showBreadCrumbs = true
 ShowCodeCopyButtons = true
 ShowRssButtonInSectionTermList = true
 ShowToc = true
+tocOpen = true
 
 # 首頁設定
 [params.homeInfoParams]
-Title = "歡迎來到我的部落格 👋"
+Title = "Welcome 👋"
 Content = """
-這裡是我分享技術文章和心得的地方。
-主要關注 [寫出您感興趣的主題] 等領域。
+Tech | Share。
 """
 
 # 社交媒體設定（新版寫法）
