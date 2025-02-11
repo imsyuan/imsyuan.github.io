@@ -8,7 +8,7 @@ slug = "hugo-deploy"
 archive = ['2025']
 tags = ['hugo', 'blog']
 categories = ["Tech"]
-cover = { image = '/posts/first/1.png', alt = 'Cover Image'}
+cover = { image = '/posts/deploy_hugo/hugo-logo-wide.png', alt = 'Cover Image'}
 +++
 
 ## 架設 Hugo 起手式
