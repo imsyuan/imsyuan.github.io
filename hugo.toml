@@ -71,6 +71,13 @@ name = "標籤"
 url = "/tags/"
 weight = 40
 
+[[menu.main]]
+identifier = "categories"
+name = "分類"
+url = "/categories/"
+weight = 50
+
+
 # 搜尋功能設定
 [outputs]
 home = ["HTML", "RSS", "JSON"]
@@ -79,6 +86,7 @@ home = ["HTML", "RSS", "JSON"]
 tag = "tags"
 category = "categories"
 series = "series"
+
 
 # 搜尋選項設定
 [params.fuseOpts]
@@ -89,3 +97,15 @@ distance = 1000
 threshold = 0.4
 minMatchCharLength = 0
 keys = ["title", "permalink", "summary", "content"]
+
+
+[markup]
+[markup.highlight]
+codeFences = true
+guessSyntax = true
+style = "monokai"
+
+[permalinks]
+posts = "/:slug/"       # 文章的 URL 使用 slug
+categories = "/category/:slug/"
+tags = "/tag/:slug/"
