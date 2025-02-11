@@ -90,4 +90,4 @@ git commit -m "Hugo 首次 commit"
 git push -u origin main
 ```
 
-接著進入 `https://{你的 Github id 名稱}.github.io` 即可看到你的 Blog。
+接著進入 `https://{你的 Github id 名稱}.github.io` 即可看到你的 Blog。 
