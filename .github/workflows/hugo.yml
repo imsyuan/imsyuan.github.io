@@ -57,8 +57,7 @@ jobs:
           HUGO_CACHEDIR: ${{ runner.temp }}/hugo_cache
           HUGO_ENVIRONMENT: production
           TZ: America/Los_Angeles
-          HUGO_GOOGLEANALYTICS: ${{ secrets.GOOGLE_ANALYTICS_ID }}  # 加入這行
-          GOOGLE_ANALYTICS_ID: ${{ secrets.GOOGLE_ANALYTICS_ID }}
+          HUGO_GOOGLEANALYTICS: ${{ secrets.GOOGLE_ANALYTICS_ID }}
         run: |
           hugo \
             --gc \
