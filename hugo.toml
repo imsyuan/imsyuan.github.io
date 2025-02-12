@@ -108,3 +108,5 @@ style = "monokai"
 posts = "/:slug/"       # 文章的 URL 使用 slug
 categories = "/category/:slug/"
 tags = "/tag/:slug/"
+
+googleAnalytics = "GA_ID_PLACEHOLDER"
