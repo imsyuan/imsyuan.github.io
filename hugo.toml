@@ -33,18 +33,24 @@ Tech | Share。
 """
 
 # 社交媒體設定（新版寫法）
-[params.social]
-github = "imsyuan"
-email = "您的email"
+#[params.social]
+#github = "imsyuan"
+#email = "您的email"
 
 # PaperMod 主題的社交圖標設定
-[[params.socialIcons]]
-name = "github"
-url = "https://github.com/imsyuan"
+#[[params.socialIcons]]
+#name = "github"
+#url = "https://github.com/imsyuan"
 
 #[[params.socialIcons]]
 #name = "email"
 #url = "mailto:您的email"
+
+[[params.socialIcons]]
+name = "rss"
+url = "/index.xml"
+
+[[params.socialIcons]]
 
 # 選單設定
 [[menu.main]]
@@ -108,3 +114,4 @@ style = "monokai"
 posts = "/:slug/"       # 文章的 URL 使用 slug
 categories = "/category/:slug/"
 tags = "/tag/:slug/"
+
