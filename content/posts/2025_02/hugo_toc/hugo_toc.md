@@ -1,3 +1,144 @@
++++
+date = '2025-02-12T11:01:51+08:00'
+draft = true
+title = '如何將 Hugo 文章目錄移到側邊'
+description = ""
+author = "Steven Chang"
+slug = "hugo_toc"
+archive = ['2025_02']
+tags = []
+categories = []
+cover = { image = '/posts/2025_02/hugo_toc/cover.png', alt = 'Cover Image'}
++++
+
+## 如何將 Hugo 文章目錄移到側邊
+
+### 產生 custom 的 css
+
+產生一個 `blank.css`
+```bash
+touch assets/css/extended/blank.css
+```
+
+產生的檔案位置會如下
+
+```
+assets
+└── css
+    └── extended
+        └── blank.css
+```
+
+貼上以下的 css 內容
+
+```css
+:root {
+    --nav-width: 1380px;
+    --article-width: 650px;
+    --toc-width: 300px;
+}
+
+.toc {
+    margin: 0 2px 40px 2px;
+    border: 1px solid var(--border);
+    background: var(--entry);
+    border-radius: var(--radius);
+    padding: 0.4em;
+}
+
+.toc-container.wide {
+    position: absolute;
+    height: 100%;
+    border-right: 1px solid var(--border);
+    left: calc((var(--toc-width) + var(--gap)) * -1);
+    top: calc(var(--gap) * 2);
+    width: var(--toc-width);
+}
+
+.wide .toc {
+    position: sticky;
+    top: var(--gap);
+    border: unset;
+    background: unset;
+    border-radius: unset;
+    width: 100%;
+    margin: 0 2px 40px 2px;
+}
+
+.toc details summary {
+    cursor: zoom-in;
+    margin-inline-start: 20px;
+    padding: 12px 0;
+}
+
+.toc details[open] summary {
+    font-weight: 500;
+}
+
+.toc-container.wide .toc .inner {
+    margin: 0;
+}
+
+.active {
+    font-size: 110%;
+    font-weight: 600;
+}
+
+.toc ul {
+    list-style-type: circle;
+}
+
+.toc .inner {
+    margin: 0 0 0 20px;
+    padding: 0px 15px 15px 20px;
+    font-size: 16px;
+
+    /*目录显示高度*/
+    max-height: 83vh;
+    overflow-y: auto;
+}
+
+.toc .inner::-webkit-scrollbar-thumb {  /*滚动条*/
+    background: var(--border);
+    border: 7px solid var(--theme);
+    border-radius: var(--radius);
+}
+
+.toc li ul {
+    margin-inline-start: calc(var(--gap) * 0.5);
+    list-style-type: none;
+}
+
+.toc li {
+    list-style: none;
+    font-size: 0.95rem;
+    padding-bottom: 5px;
+}
+
+.toc li a:hover {
+    color: var(--secondary);
+}
+
+```
+
+### 產生 layouts 的 html
+
+產生一個 `toc.html`
+```bash
+touch layouts/partials/toc.html
+```
+
+產生的檔案位置會如下
+
+```
+layouts
+└── partials
+    └── toc.html
+```
+
+貼上以下的 html 內容
+
+```html
 {{- $headers := findRE "<h[1-6].*?>(.|\n])+?</h[1-6]>" .Content -}}
 {{- $has_headers := ge (len $headers) 1 -}}
 {{- if $has_headers -}}
@@ -152,3 +293,6 @@
     }
 </script>
 {{- end }}
+
+```
+

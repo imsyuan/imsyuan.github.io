@@ -8,7 +8,7 @@ slug = "hugo-deploy"
 archive = ['2025']
 tags = ['hugo', 'blog']
 categories = ["Tech"]
-cover = { image = '/posts/deploy_hugo/hugo-logo-wide.png', alt = 'Cover Image'}
+cover = { image = '/posts/2025_02/deploy_hugo/cover.png', alt = 'Cover Image'}
 +++
 
 ## 架設 Hugo 起手式
@@ -39,7 +39,7 @@ hugo new site blog
 ### 建立新文章
 為了方便管理，我會將文章放在 posts 資料夾中。
 ```bash
-hugo new posts/deploy_hugo/deploy_hugo.md
+hugo new posts/2025_02/2025_02.md
 ```
 
 ### 啟動 HUGO 伺服器
