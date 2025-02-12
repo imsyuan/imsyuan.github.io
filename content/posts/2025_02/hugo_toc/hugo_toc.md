@@ -2,13 +2,13 @@
 date = '2025-02-12T11:01:51+08:00'
 draft = false
 title = '如何將 Hugo 文章目錄移到側邊'
-description = ""
+description = "如何將 Hugo 文章目錄移到側邊"
 author = "Steven Chang"
 slug = "hugo_toc"
-archive = ['2025_02']
-tags = []
-categories = []
-cover = { image = '/posts/2025_02/hugo_toc/cover.png', alt = 'Cover Image'}
+archive = ['2025']
+tags = ['hugo', 'blog', 'toc']
+categories = ['Tech']
+cover = { image = '/posts/2025_02/hugo_toc/cover.png', alt = 'Cover Image for toc'}
 +++
 
 ## 如何將 Hugo 文章目錄移到側邊
@@ -296,3 +296,6 @@ layouts
 
 ```
 
+結果如下
+
+![hugo_toc_exampleF.png](/posts/2025_02/hugo_toc/hugo_toc_example.png)

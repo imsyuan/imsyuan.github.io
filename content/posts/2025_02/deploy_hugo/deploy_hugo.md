@@ -38,7 +38,7 @@ hugo new site blog
 
 ### 建立新文章
 為了方便管理，我會將文章放在 posts 資料夾中。
-```bash
+```bash 
 hugo new posts/2025_02/2025_02.md
 ```
 
