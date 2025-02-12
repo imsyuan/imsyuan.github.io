@@ -98,7 +98,6 @@ threshold = 0.4
 minMatchCharLength = 0
 keys = ["title", "permalink", "summary", "content"]
 
-
 [markup]
 [markup.highlight]
 codeFences = true

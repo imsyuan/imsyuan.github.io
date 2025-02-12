@@ -57,8 +57,15 @@ hugo server -D
 進入 [Hugo Themes](https://themes.gohugo.io/) 選擇一個喜歡的主題，將它加入到 Blog 中。 這邊選擇 [PaperMod](https://github.com/adityatelange/hugo-PaperMod) 主題。
 透過官方推薦的將 submodule 加入到專案中。
 ```bash
+git init
 git submodule add --depth=1 https://github.com/adityatelange/hugo-PaperMod.git themes/PaperMod
 git submodule update --init --recursive # needed when you reclone your repo (submodules may not get cloned automatically)
+```
+
+### 修改 hugo.toml
+```toml
+# 新增 theme
+theme = 'PaperMod'
 ```
 
 ## Local Build 出可以部署的檔案
@@ -76,7 +83,6 @@ hugo --gc --minify
 
 ```bash
 ## Git init
-git init
 git branch -M main
 
 ## 新增 remote
