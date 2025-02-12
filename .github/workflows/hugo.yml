@@ -48,9 +48,6 @@ jobs:
       - name: Setup Pages
         id: pages
         uses: actions/configure-pages@v5
-      - name: Update GA ID
-        run: |
-          sed -i "s/googleAnalytics = \"GA_ID_PLACEHOLDER\"/googleAnalytics = \"${{ secrets.GOOGLE_ANALYTICS_ID }}\"/" hugo.toml
       - name: Install Node.js dependencies
         run: "[[ -f package-lock.json || -f npm-shrinkwrap.json ]] && npm ci || true"
       - name: Build with Hugo
@@ -58,6 +55,7 @@ jobs:
           HUGO_CACHEDIR: ${{ runner.temp }}/hugo_cache
           HUGO_ENVIRONMENT: production
           TZ: America/Los_Angeles
+          GOOGLE_ANALYTICS_ID: ${{ secrets.GOOGLE_ANALYTICS_ID }}
         run: |
           hugo \
             --gc \
