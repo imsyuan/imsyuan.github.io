@@ -28,7 +28,7 @@ brew install hugo
 ```bash
 hugo version
 ```
-![carbon.png](/posts/deploy_hugo/carbon.png)
+![carbon.png](/posts/2025_02/deploy_hugo/carbon.png)
 
 ### 建立新 Blog
 
@@ -49,7 +49,7 @@ hugo new posts/2025_02/2025_02.md
 hugo server -D
 ```
 
-![hugo_server_start.png](/posts/deploy_hugo/hugo_server_start.png)
+![hugo_server_start.png](/posts/2025_02/deploy_hugo/hugo_server_start.png)
 
 開啟 `http://localhost:1313/` 即可看到 Hugo 預設的網頁。
 
@@ -79,7 +79,7 @@ hugo --gc --minify
 
 在 Github 上建立一個新的 Repository，名稱為 `{你的 Github id 名稱}.github.io`。
 
-![create_github_repo.png](/posts/deploy_hugo/create_github_repo.png)
+![create_github_repo.png](/posts/2025_02/deploy_hugo/create_github_repo.png)
 
 ```bash
 ## Git init
