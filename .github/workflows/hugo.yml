@@ -158,7 +158,7 @@ jobs:
               echo "Processing file: $file"
               echo "Title: $title"
               echo "Needs URL: ${{ needs.deploy.outputs.url }}"
-              echo "Cover URL: $BASE_URL/$url/cover.jpg"
+              echo "Cover URL: $BASE_URL/$url/cover.png"
               echo "最終 URL: $BASE_URL/$slug"
               break  # 只處理第一個變更的檔案
             fi
