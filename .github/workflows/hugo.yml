@@ -103,8 +103,14 @@ jobs:
         if: steps.changed-files.outputs.any_changed == 'true'
         id: post-info
         run: |
-          REPO_OWNER=$(echo "$GITHUB_REPOSITORY" | cut -d'/' -f1)
-          echo "REPO_URL=https://$REPO_OWNER.github.io"
+          # 取得基礎 URL 並確保使用 HTTPS
+          BASE_URL="${{ needs.deploy.outputs.url }}"
+          # 移除結尾斜線
+          BASE_URL=${BASE_URL%/}
+          # 將 http:// 替換成 https://
+          BASE_URL=${BASE_URL/http:\/\//https:\/\/}
+        
+          echo "基礎 URL: $BASE_URL"
           
           # 顯示所有變更的檔案以便偵錯
           echo "Changed files:"
@@ -113,10 +119,18 @@ jobs:
           for file in $(echo "${{ steps.changed-files.outputs.all_changed_files }}" | tr '|' '\n'); do
             if [[ -f "$file" ]]; then
               # 提取文章標題
-              title=$(grep -m 1 "^title: " "$file" || echo "title: 新文章")
-              title=${title#"title: "}
-              title=${title#"\""} 
-              title=${title%"\""}
+              title=$(grep -m 1 "^title = " "$file" || echo "title: 新文章")
+              if [ $? -eq 0 ]; then
+                echo "找到標題行: $title"
+                # 移除 title = 和引號
+                title=${title#*title = }  # 移除 "title = " 部分
+                title=${title#"'"}        # 移除開頭的單引號
+                title=${title%"'"}        # 移除結尾的單引號
+                echo "處理後的標題: $title"
+              else
+                echo "無法找到標題，使用預設值"
+                title="新文章"
+              fi
           
               # 從檔案路徑建構 URL 路徑
               url=${file#"content/"}
@@ -124,13 +138,13 @@ jobs:
           
               # 設定環境變數
               echo "POST_TITLE=$title" >> $GITHUB_ENV
-              echo "POST_URL=${{ needs.deploy.outputs.url }}/$url" >> $GITHUB_ENV
+              echo "POST_URL=$BASE_URL/$url" >> $GITHUB_ENV
           
               # 顯示處理結果以便偵錯
               echo "Processing file: $file"
               echo "Title: $title"
               echo "Needs URL: ${{ needs.deploy.outputs.url }}"
-              echo "URL path: ${{ needs.deploy.outputs.url }}/$url"
+              echo "最終 URL: $BASE_URL/$url"
               break  # 只處理第一個變更的檔案
             fi
           done
