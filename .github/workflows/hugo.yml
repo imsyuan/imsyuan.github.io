@@ -79,3 +79,87 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
+
+  notify:
+    runs-on: ubuntu-latest
+    needs: deploy  # 確保在部署成功後才執行通知
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+
+      - name: Get changed files
+        id: changed-files
+        uses: tj-actions/changed-files@v41
+        with:
+          files: content/posts/**
+          separator: "|"
+
+      - name: Extract Post Info
+        if: steps.changed-files.outputs.any_changed == 'true'
+        id: post-info
+        run: |
+          for file in $(echo "${{ steps.changed-files.outputs.all_changed_files }}" | tr '|' '\n'); do
+            if [[ $file == content/posts/* ]]; then
+              title=$(grep -m 1 "title:" "$file" | sed 's/title: *//;s/"//g')
+              url=$(echo "$file" | sed 's/content\/posts\///;s/\.md$//')
+              # 使用 deployment URL
+              baseURL="${{ steps.deployment.outputs.page_url }}"
+              echo "POST_TITLE=$title" >> $GITHUB_ENV
+              echo "POST_URL=$baseURL/posts/$url" >> $GITHUB_ENV
+            fi
+          done
+
+      - name: Send Line Message
+        if: steps.changed-files.outputs.any_changed == 'true'
+        run: |
+          message='{
+            "type": "flex",
+            "altText": "新文章發布：${{ env.POST_TITLE }}",
+            "contents": {
+              "type": "bubble",
+              "header": {
+                "type": "box",
+                "layout": "vertical",
+                "contents": [
+                  {
+                    "type": "text",
+                    "text": "🎉 新文章發布",
+                    "weight": "bold",
+                    "size": "xl"
+                  }
+                ]
+              },
+              "body": {
+                "type": "box",
+                "layout": "vertical",
+                "contents": [
+                  {
+                    "type": "text",
+                    "text": "${{ env.POST_TITLE }}",
+                    "wrap": true,
+                    "weight": "bold",
+                    "size": "md"
+                  },
+                  {
+                    "type": "button",
+                    "style": "primary",
+                    "action": {
+                      "type": "uri",
+                      "label": "閱讀文章",
+                      "uri": "${{ env.POST_URL }}"
+                    },
+                    "margin": "md"
+                  }
+                ]
+              }
+            }
+          }'
+          
+          curl -X POST https://api.line.me/v2/bot/message/broadcast \
+            -H "Content-Type: application/json" \
+            -H "Authorization: Bearer ${{ secrets.LINE_CHANNEL_ACCESS_TOKEN }}" \
+            -d "{
+              \"messages\": [$message]
+            }"

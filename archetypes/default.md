@@ -8,7 +8,7 @@ slug = "{{ .File.BaseFileName }}"
 archive = ['{{ .Date | dateFormat "2006" }}']
 tags = []
 categories = []
-cover = { image = '/posts/{{ .File.BaseFileName }}/{{ .Date | dateFormat "2006_01" }}/cover.png', alt = 'Cover Image'}
+cover = { image = '/posts/{{ .Date | dateFormat "2006" }}/{{ .Date | dateFormat "01" }}/{{ .File.BaseFileName }}/cover.png', alt = 'Cover Image'}
 +++
 
 ## Title

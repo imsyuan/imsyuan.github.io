@@ -8,7 +8,7 @@ slug = "hugo-deploy"
 archive = ['2025']
 tags = ['hugo', 'blog']
 categories = ["Tech"]
-cover = { image = '/posts/2025_02/deploy_hugo/cover.png', alt = 'Cover Image'}
+cover = { image = '/posts/2025/02/deploy_hugo/cover.png', alt = 'Cover Image'}
 +++
 
 ## 架設 Hugo 起手式
@@ -28,7 +28,7 @@ brew install hugo
 ```bash
 hugo version
 ```
-![carbon.png](/posts/2025_02/deploy_hugo/carbon.png)
+![carbon.png](/posts/2025/02/deploy_hugo/carbon.png)
 
 ### 建立新 Blog
 
@@ -39,7 +39,7 @@ hugo new site blog
 ### 建立新文章
 為了方便管理，我會將文章放在 posts 資料夾中。
 ```bash 
-hugo new posts/2025_02/2025_02.md
+hugo new posts/2025/2025.md
 ```
 
 ### 啟動 HUGO 伺服器
@@ -49,7 +49,7 @@ hugo new posts/2025_02/2025_02.md
 hugo server -D
 ```
 
-![hugo_server_start.png](/posts/2025_02/deploy_hugo/hugo_server_start.png)
+![hugo_server_start.png](/posts/2025/02/deploy_hugo/hugo_server_start.png)
 
 開啟 `http://localhost:1313/` 即可看到 Hugo 預設的網頁。
 
@@ -79,7 +79,7 @@ hugo --gc --minify
 
 在 Github 上建立一個新的 Repository，名稱為 `{你的 Github id 名稱}.github.io`。
 
-![create_github_repo.png](/posts/2025_02/deploy_hugo/create_github_repo.png)
+![create_github_repo.png](/posts/2025/02/deploy_hugo/create_github_repo.png)
 
 ```bash
 ## Git init
