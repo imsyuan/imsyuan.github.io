@@ -133,6 +133,7 @@ jobs:
               fi
           
               # 從檔案路徑建構 URL 路徑
+              url=${file#"content/"}
               url=${file%.md}
               url=${url%/*} 
           
