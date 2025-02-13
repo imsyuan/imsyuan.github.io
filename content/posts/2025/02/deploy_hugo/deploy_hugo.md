@@ -1,13 +1,13 @@
 +++
 date = '2025-02-07T23:37:02+08:00'
 draft = false
-description = "完整的 Hugo 架設 Blog 教學"
-author = "Steven Chang"
+description = '完整的 Hugo 架設 Blog 教學'
+author = 'Steven Chang'
 title = '使用 Hugo 架設 Blog'
-slug = "hugo-deploy"
+slug = 'hugo-deploy'
 archive = ['2025']
 tags = ['hugo', 'blog']
-categories = ["Tech"]
+categories = ['Tech']
 cover = { image = '/posts/2025/02/deploy_hugo/cover.png', alt = 'Cover Image'}
 +++
 
