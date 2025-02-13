@@ -100,17 +100,79 @@ jobs:
         if: steps.changed-files.outputs.any_changed == 'true'
         id: post-info
         run: |
+          name: Deploy Hugo site to Pages
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+defaults:
+  run:
+    shell: bash
+
+jobs:
+  build:
+  # ... (保持原有的 build job 不變)
+
+  deploy:
+  # ... (保持原有的 deploy job 不變)
+
+  notify:
+    runs-on: ubuntu-latest
+    needs: deploy
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+
+      - name: Get changed files
+        id: changed-files
+        uses: tj-actions/changed-files@v41
+        with:
+          files: content/**/*.md
+          separator: "|"
+
+      - name: Extract Post Info
+        if: steps.changed-files.outputs.any_changed == 'true'
+        id: post-info
+        run: |
+          # 顯示所有變更的檔案以便偵錯
+          echo "Changed files:"
+          echo "${{ steps.changed-files.outputs.all_changed_files }}"
+          
           for file in $(echo "${{ steps.changed-files.outputs.all_changed_files }}" | tr '|' '\n'); do
-            if [[ $file == content/posts/* ]]; then
-              if [[ -f $file ]]; then
-                title=$(grep -m 1 "title:" "$file" | sed 's/title: *//;s/"//g')
-                url=$(echo "$file" | sed 's/content\/posts\///;s/\.md$//')
-                baseURL="${{ steps.deployment.outputs.page_url }}"
-                echo "POST_TITLE=$title" >> $GITHUB_ENV
-                echo "POST_URL=$baseURL/posts/$url" >> $GITHUB_ENV
-              else
-                echo "File $file does not exist."
-              fi
+            if [[ -f "$file" ]]; then
+              # 提取文章標題
+              title=$(grep -m 1 "^title: " "$file" || echo "title: 新文章")
+              title=${title#"title: "}
+              title=${title#"\""} 
+              title=${title%"\""}
+          
+              # 從檔案路徑建構 URL 路徑
+              url=${file#"content/"}
+              url=${url%.md}
+          
+              # 設定環境變數
+              echo "POST_TITLE=$title" >> $GITHUB_ENV
+              echo "POST_URL=${{ steps.deployment.outputs.page_url }}/$url" >> $GITHUB_ENV
+          
+              # 顯示處理結果以便偵錯
+              echo "Processing file: $file"
+              echo "Title: $title"
+              echo "URL path: $url"
+              break  # 只處理第一個變更的檔案
             fi
           done
 
