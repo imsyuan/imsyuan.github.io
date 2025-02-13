@@ -93,7 +93,8 @@ jobs:
         id: changed-files
         uses: tj-actions/changed-files@v41
         with:
-          files: content/posts/**
+          files: |
+            content/posts/**/*.md
           separator: "|"
 
       - name: Extract Post Info
@@ -123,7 +124,7 @@ jobs:
               # 顯示處理結果以便偵錯
               echo "Processing file: $file"
               echo "Title: $title"
-              echo "URL path: $url"
+              echo "URL path: ${{ steps.deployment.outputs.page_url }}/$url"
               break  # 只處理第一個變更的檔案
             fi
           done
