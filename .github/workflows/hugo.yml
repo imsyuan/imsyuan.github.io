@@ -103,13 +103,13 @@ jobs:
           for file in $(echo "${{ steps.changed-files.outputs.all_changed_files }}" | tr '|' '\n'); do
             if [[ $file == content/posts/* ]]; then
               if [[ -f $file ]]; then
-#                title=$(grep -m 1 "title:" "$file" | sed 's/title: *//;s/"//g')
-#                url=$(echo "$file" | sed 's/content\/posts\///;s/\.md$//')
-#                baseURL="${{ steps.deployment.outputs.page_url }}"
-#                echo "POST_TITLE=$title" >> $GITHUB_ENV
-#                echo "POST_URL=$baseURL/posts/$url" >> $GITHUB_ENV
-#                else
-#                echo "File $file does not exist."
+                title=$(grep -m 1 "title:" "$file" | sed 's/title: *//;s/"//g')
+                url=$(echo "$file" | sed 's/content\/posts\///;s/\.md$//')
+                baseURL="${{ steps.deployment.outputs.page_url }}"
+                echo "POST_TITLE=$title" >> $GITHUB_ENV
+                echo "POST_URL=$baseURL/posts/$url" >> $GITHUB_ENV
+              else
+                echo "File $file does not exist."
               fi
             fi
           done
