@@ -2,7 +2,7 @@
 date = '{{ .Date }}'
 draft = true
 title = '{{ replace .File.ContentBaseName "-" " " | title }}'
-description = ""
+description = ''
 author = 'Steven Chang'
 slug = '{{ .File.BaseFileName }}'
 archive = ['{{ .Date | dateFormat "2006" }}']

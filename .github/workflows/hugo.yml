@@ -134,6 +134,7 @@ jobs:
           
               # 從檔案路徑建構 URL 路徑
               url=${file%.md}
+              url=${url%/*} 
           
               # 提取 slug
               slug=$(grep -m 1 "^slug = " "$file" || echo "")
@@ -151,7 +152,7 @@ jobs:
               # 設定環境變數
               echo "POST_TITLE=$title" >> $GITHUB_ENV
               echo "POST_URL=$BASE_URL/$slug" >> $GITHUB_ENV
-              echo "POST_COVER=$BASE_URL/$url/cover.jpg" >> $GITHUB_ENV
+              echo "POST_COVER=$BASE_URL/$url/cover.png" >> $GITHUB_ENV
           
               # 顯示處理結果以便偵錯
               echo "Processing file: $file"
