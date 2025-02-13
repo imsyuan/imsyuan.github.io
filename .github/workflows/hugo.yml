@@ -133,18 +133,32 @@ jobs:
               fi
           
               # 從檔案路徑建構 URL 路徑
-              url=${file#"content/"}
               url=${url%.md}
+          
+              # 提取 slug
+              slug=$(grep -m 1 "^slug = " "$file" || echo "")
+              if [ ! -z "$slug" ]; then
+                slug=${slug#*slug = }
+                slug=${slug#"'"}
+                slug=${slug%"'"}
+                echo "找到 slug: $slug"
+              else
+                # 如果沒有 slug，用檔案名作為後備
+                slug=$(basename "$file" .md)
+                echo "使用檔案名作為 slug: $slug"
+              fi
           
               # 設定環境變數
               echo "POST_TITLE=$title" >> $GITHUB_ENV
-              echo "POST_URL=$BASE_URL/$url" >> $GITHUB_ENV
+              echo "POST_URL=$BASE_URL/$slug" >> $GITHUB_ENV
+              echo "POST_COVER=$BASE_URL/$url/cover.jpg" >> $GITHUB_ENV
           
               # 顯示處理結果以便偵錯
               echo "Processing file: $file"
               echo "Title: $title"
               echo "Needs URL: ${{ needs.deploy.outputs.url }}"
-              echo "最終 URL: $BASE_URL/$url"
+              echo "Cover URL: $BASE_URL/$url/cover.jpg"
+              echo "最終 URL: $BASE_URL/$slug"
               break  # 只處理第一個變更的檔案
             fi
           done
@@ -157,6 +171,13 @@ jobs:
             "altText": "新文章發布：${{ env.POST_TITLE }}",
             "contents": {
               "type": "bubble",
+              "hero": {
+                  "type": "image",
+                  "url": "${{ env.POST_COVER }}",
+                  "size": "full",
+                  "aspectRatio": "20:13",
+                  "aspectMode": "cover"
+              },
               "header": {
                 "type": "box",
                 "layout": "vertical",
