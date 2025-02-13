@@ -133,7 +133,7 @@ jobs:
               fi
           
               # 從檔案路徑建構 URL 路徑
-              url=${url%.md}
+              url=${file%.md}
           
               # 提取 slug
               slug=$(grep -m 1 "^slug = " "$file" || echo "")
