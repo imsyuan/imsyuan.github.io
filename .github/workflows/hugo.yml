@@ -119,12 +119,12 @@ jobs:
           
               # 設定環境變數
               echo "POST_TITLE=$title" >> $GITHUB_ENV
-              echo "POST_URL=${{ steps.deployment.outputs.page_url }}/$url" >> $GITHUB_ENV
+              echo "POST_URL=${{ needs.deploy.outputs.url }}/$url" >> $GITHUB_ENV
           
               # 顯示處理結果以便偵錯
               echo "Processing file: $file"
               echo "Title: $title"
-              echo "URL path: ${{ steps.deployment.outputs.page_url }}/$url"
+              echo "URL path: ${{ needs.deploy.outputs.url }}/$url"
               break  # 只處理第一個變更的檔案
             fi
           done
