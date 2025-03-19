@@ -1,0 +1,6 @@
+body {
+    letter-spacing: 0.1em; /* 讓內文有較寬鬆的閱讀體驗 */
+}
+h1, h2, h3, h4, h5, h6 {
+    letter-spacing: 0.1em; /* 標題更具設計感 */
+}
