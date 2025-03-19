@@ -82,145 +82,145 @@ jobs:
         id: deployment
         uses: actions/deploy-pages@v4
 
-#  notify:
-#    runs-on: ubuntu-latest
-#    needs: deploy  # 確保在部署成功後才執行通知
-#    steps:
-#      - name: Checkout
-#        uses: actions/checkout@v4
-#        with:
-#          fetch-depth: 2
-#
-#      - name: Get changed files
-#        id: changed-files
-#        uses: tj-actions/changed-files@v41
-#        with:
-#          files: |
-#            content/posts/**/*.md
-#          separator: "|"
-#
-#      - name: Extract Post Info
-#        if: steps.changed-files.outputs.any_changed == 'true'
-#        id: post-info
-#        run: |
-#          # 取得基礎 URL 並確保使用 HTTPS
-#          BASE_URL="${{ needs.deploy.outputs.url }}"
-#          # 移除結尾斜線
-#          BASE_URL=${BASE_URL%/}
-#          # 將 http:// 替換成 https://
-#          BASE_URL=${BASE_URL/http:\/\//https:\/\/}
-#
-#          echo "基礎 URL: $BASE_URL"
-#
-#          # 顯示所有變更的檔案以便偵錯
-#          echo "Changed files:"
-#          echo "${{ steps.changed-files.outputs.all_changed_files }}"
-#
-#          for file in $(echo "${{ steps.changed-files.outputs.all_changed_files }}" | tr '|' '\n'); do
-#            if [[ -f "$file" ]]; then
-#              # 提取文章標題
-#              title=$(grep -m 1 "^title = " "$file" || echo "title: 新文章")
-#              if [ $? -eq 0 ]; then
-#                echo "找到標題行: $title"
-#                # 移除 title = 和引號
-#                title=${title#*title = }  # 移除 "title = " 部分
-#                title=${title#"'"}        # 移除開頭的單引號
-#                title=${title%"'"}        # 移除結尾的單引號
-#                echo "處理後的標題: $title"
-#              else
-#                echo "無法找到標題，使用預設值"
-#                title="新文章"
-#              fi
-#
-#              # 從檔案路徑建構 URL 路徑
-#              url=${file#"content/"}
-#              url=${url%.md}
-#              url=${url%/*}
-#
-#              # 提取 slug
-#              slug=$(grep -m 1 "^slug = " "$file" || echo "")
-#              if [ ! -z "$slug" ]; then
-#                slug=${slug#*slug = }
-#                slug=${slug#"'"}
-#                slug=${slug%"'"}
-#                echo "找到 slug: $slug"
-#              else
-#                # 如果沒有 slug，用檔案名作為後備
-#                slug=$(basename "$file" .md)
-#                echo "使用檔案名作為 slug: $slug"
-#              fi
-#
-#              # 設定環境變數
-#              echo "POST_TITLE=$title" >> $GITHUB_ENV
-#              echo "POST_URL=$BASE_URL/$slug" >> $GITHUB_ENV
-#              echo "POST_COVER=$BASE_URL/$url/cover.png" >> $GITHUB_ENV
-#
-#              # 顯示處理結果以便偵錯
-#              echo "Processing file: $file"
-#              echo "Title: $title"
-#              echo "Needs URL: ${{ needs.deploy.outputs.url }}"
-#              echo "Cover URL: $BASE_URL/$url/cover.png"
-#              echo "最終 URL: $BASE_URL/$slug"
-#              break  # 只處理第一個變更的檔案
-#            fi
-#          done
-#
-#      - name: Send Line Message
-#        if: steps.changed-files.outputs.any_changed == 'true'
-#        run: |
-#          message='{
-#            "type": "flex",
-#            "altText": "新文章發布：${{ env.POST_TITLE }}",
-#            "contents": {
-#              "type": "bubble",
-#              "hero": {
-#                  "type": "image",
-#                  "url": "${{ env.POST_COVER }}",
-#                  "size": "full",
-#                  "aspectRatio": "20:13",
-#                  "aspectMode": "cover"
-#              },
-#              "header": {
-#                "type": "box",
-#                "layout": "vertical",
-#                "contents": [
-#                  {
-#                    "type": "text",
-#                    "text": "🎉 新文章發布",
-#                    "weight": "bold",
-#                    "size": "xl"
-#                  }
-#                ]
-#              },
-#              "body": {
-#                "type": "box",
-#                "layout": "vertical",
-#                "contents": [
-#                  {
-#                    "type": "text",
-#                    "text": "${{ env.POST_TITLE }}",
-#                    "wrap": true,
-#                    "weight": "bold",
-#                    "size": "md"
-#                  },
-#                  {
-#                    "type": "button",
-#                    "style": "primary",
-#                    "action": {
-#                      "type": "uri",
-#                      "label": "閱讀文章",
-#                      "uri": "${{ env.POST_URL }}"
-#                    },
-#                    "margin": "md"
-#                  }
-#                ]
-#              }
-#            }
-#          }'
-#
-#          curl -X POST https://api.line.me/v2/bot/message/broadcast \
-#            -H "Content-Type: application/json" \
-#            -H "Authorization: Bearer ${{ secrets.LINE_CHANNEL_ACCESS_TOKEN }}" \
-#            -d "{
-#              \"messages\": [$message]
-#            }"
+  notify:
+    runs-on: ubuntu-latest
+    needs: deploy  # 確保在部署成功後才執行通知
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+
+      - name: Get changed files
+        id: changed-files
+        uses: tj-actions/changed-files@v41
+        with:
+          files: |
+            content/posts/**/*.md
+          separator: "|"
+
+      - name: Extract Post Info
+        if: steps.changed-files.outputs.any_changed == 'true'
+        id: post-info
+        run: |
+          # 取得基礎 URL 並確保使用 HTTPS
+          BASE_URL="${{ needs.deploy.outputs.url }}"
+          # 移除結尾斜線
+          BASE_URL=${BASE_URL%/}
+          # 將 http:// 替換成 https://
+          BASE_URL=${BASE_URL/http:\/\//https:\/\/}
+
+          echo "基礎 URL: $BASE_URL"
+
+          # 顯示所有變更的檔案以便偵錯
+          echo "Changed files:"
+          echo "${{ steps.changed-files.outputs.all_changed_files }}"
+
+          for file in $(echo "${{ steps.changed-files.outputs.all_changed_files }}" | tr '|' '\n'); do
+            if [[ -f "$file" ]]; then
+              # 提取文章標題
+              title=$(grep -m 1 "^title = " "$file" || echo "title: 新文章")
+              if [ $? -eq 0 ]; then
+                echo "找到標題行: $title"
+                # 移除 title = 和引號
+                title=${title#*title = }  # 移除 "title = " 部分
+                title=${title#"'"}        # 移除開頭的單引號
+                title=${title%"'"}        # 移除結尾的單引號
+                echo "處理後的標題: $title"
+              else
+                echo "無法找到標題，使用預設值"
+                title="新文章"
+              fi
+
+              # 從檔案路徑建構 URL 路徑
+              url=${file#"content/"}
+              url=${url%.md}
+              url=${url%/*}
+
+              # 提取 slug
+              slug=$(grep -m 1 "^slug = " "$file" || echo "")
+              if [ ! -z "$slug" ]; then
+                slug=${slug#*slug = }
+                slug=${slug#"'"}
+                slug=${slug%"'"}
+                echo "找到 slug: $slug"
+              else
+                # 如果沒有 slug，用檔案名作為後備
+                slug=$(basename "$file" .md)
+                echo "使用檔案名作為 slug: $slug"
+              fi
+
+              # 設定環境變數
+              echo "POST_TITLE=$title" >> $GITHUB_ENV
+              echo "POST_URL=$BASE_URL/$slug" >> $GITHUB_ENV
+              echo "POST_COVER=$BASE_URL/$url/cover.png" >> $GITHUB_ENV
+
+              # 顯示處理結果以便偵錯
+              echo "Processing file: $file"
+              echo "Title: $title"
+              echo "Needs URL: ${{ needs.deploy.outputs.url }}"
+              echo "Cover URL: $BASE_URL/$url/cover.png"
+              echo "最終 URL: $BASE_URL/$slug"
+              break  # 只處理第一個變更的檔案
+            fi
+          done
+
+      - name: Send Line Message
+        if: steps.changed-files.outputs.any_changed == 'true'
+        run: |
+          message='{
+            "type": "flex",
+            "altText": "新文章發布：${{ env.POST_TITLE }}",
+            "contents": {
+              "type": "bubble",
+              "hero": {
+                  "type": "image",
+                  "url": "${{ env.POST_COVER }}",
+                  "size": "full",
+                  "aspectRatio": "20:13",
+                  "aspectMode": "cover"
+              },
+              "header": {
+                "type": "box",
+                "layout": "vertical",
+                "contents": [
+                  {
+                    "type": "text",
+                    "text": "🎉 新文章發布",
+                    "weight": "bold",
+                    "size": "xl"
+                  }
+                ]
+              },
+              "body": {
+                "type": "box",
+                "layout": "vertical",
+                "contents": [
+                  {
+                    "type": "text",
+                    "text": "${{ env.POST_TITLE }}",
+                    "wrap": true,
+                    "weight": "bold",
+                    "size": "md"
+                  },
+                  {
+                    "type": "button",
+                    "style": "primary",
+                    "action": {
+                      "type": "uri",
+                      "label": "閱讀文章",
+                      "uri": "${{ env.POST_URL }}"
+                    },
+                    "margin": "md"
+                  }
+                ]
+              }
+            }
+          }'
+
+          curl -X POST https://api.line.me/v2/bot/message/broadcast \
+            -H "Content-Type: application/json" \
+            -H "Authorization: Bearer ${{ secrets.LINE_CHANNEL_ACCESS_TOKEN }}" \
+            -d "{
+              \"messages\": [$message]
+            }"
