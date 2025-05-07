@@ -34,3 +34,6 @@ cover = { image = '/posts/2025/05/obsidian_canva_center_text/cover.png', alt = '
 7. 關閉資料夾視窗，別忘了啟用剛剛建立的 Canvas-Snippets（此時你的 Obsidian 設定應該還是開著的）。
 
 ![setting_css_snippets.png](/posts/2025/05/obsidian_canva_center_text/setting_css_snippets.png)
+
+
+[Ref](https://www.reddit.com/r/ObsidianMD/comments/179un8s/comment/l8ulmgq/?utm_source=share&utm_medium=web3x&utm_name=web3xcss&utm_term=1&utm_content=share_button)
