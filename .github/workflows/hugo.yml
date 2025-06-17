@@ -168,6 +168,12 @@ jobs:
       - name: Check if Post Already Exists
         id: check-post
         run: |
+          if [ -z "${{ env.POST_URL }}" ]; then
+            echo "POST_URL is not set or empty. Skipping notification."
+            echo "POST_EXISTS=false" >> $GITHUB_ENV
+            exit 0
+          fi
+
           response=$(curl -o /dev/null -s -w "%{http_code}" "${{ env.POST_URL }}")
           if [ "$response" -eq 200 ]; then
             echo "Post already exists. Skipping notification."
