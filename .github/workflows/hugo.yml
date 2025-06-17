@@ -172,8 +172,12 @@ jobs:
           if [ "$response" -eq 200 ]; then
             echo "Post already exists. Skipping notification."
             echo "POST_EXISTS=true" >> $GITHUB_ENV
-          else
+          elif [ "$response" -eq 404 ]; then
+            echo "Post does not exist. Proceeding with notification."
             echo "POST_EXISTS=false" >> $GITHUB_ENV
+          else
+            echo "Unexpected HTTP response: $response"
+            exit 1
           fi
 
       - name: Send Line Message
