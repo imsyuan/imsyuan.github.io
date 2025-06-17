@@ -177,7 +177,7 @@ jobs:
           fi
 
       - name: Send Line Message
-        if: steps.changed-files.outputs.any_changed == 'true'
+        if: steps.changed-files.outputs.any_changed == 'true' && env.POST_EXISTS == 'false'
         run: |
           message='{
             "type": "flex",
@@ -234,4 +234,15 @@ jobs:
             -H "Authorization: Bearer ${{ secrets.LINE_CHANNEL_ACCESS_TOKEN }}" \
             -d "{
               \"messages\": [$message]
+            }"
+
+      - name: Send Discord Message
+        if: steps.changed-files.outputs.any_changed == 'true' && env.POST_EXISTS == 'false'
+        run: |
+          message="**新文章發布：${{ env.POST_TITLE }}**\n\n閱讀文章：[點擊這裡](${{ env.POST_URL }})"
+
+          curl -X POST ${{ secrets.DISCORD_WEBHOOK_URL }} \
+            -H "Content-Type: application/json" \
+            -d "{
+              \"content\": \"$message\"
             }"

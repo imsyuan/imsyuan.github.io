@@ -11,8 +11,6 @@ categories = ['AI', 'Filament']
 cover = { image = '/posts/2025/05/ai_google_jules/cover.png', alt = 'Cover Image'}
 +++
 
-## Google 重磅推出 Jules AI 對決 OpenAI 的 Codex
-
 Google 在 2025 年 5 月 21 日宣布推出其最新的 AI 編程助手 Jules，旨在與 OpenAI 的 Codex 競爭。Jules 是一個強大的 AI 編程助手，專為開發者設計，能夠理解自然語言指令並生成高質量的程式碼。
 
 以下就來試試看，如何透過 Jules 來幫我的一個 Filament 專案，加上我想要的功能。
