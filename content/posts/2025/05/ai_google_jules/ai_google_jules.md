@@ -7,7 +7,7 @@ author = 'Steven Chang'
 slug = 'ai_google_jules'
 archive = ['2025']
 tags = ['AI', 'Google', 'Jules', 'OpenAI', 'Codex', 'Filament']
-categories = ['AI']
+categories = ['AI', 'Filament']
 cover = { image = '/posts/2025/05/ai_google_jules/cover.png', alt = 'Cover Image'}
 +++
 
