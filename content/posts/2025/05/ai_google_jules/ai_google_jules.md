@@ -43,4 +43,4 @@ feat: assign config value $hr_base_salary to Employee resource's base_salary
 
 ### 總結
 整體來說算是一個不錯的體驗，Jules 能夠快速理解我的需求並生成相應的程式碼。雖然在過程中遇到了一些錯誤，但它能夠自動修復並繼續進行。這對於開發者來說是一個很大的幫助，特別是在處理複雜的專案時。
-我相信一個好的且明確的 prompt 可能會影響到 AI 執行的結果。這或許是我們需要多加學習如何當一個好的 prompt engineerㄅㄠ。
+我相信一個好的且明確的 prompt 可能會影響到 AI 執行的結果。這或許是我們需要多加學習如何當一個好的 prompt engineer。

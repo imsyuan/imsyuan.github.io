@@ -165,6 +165,17 @@ jobs:
             fi
           done
 
+      - name: Check if Post Already Exists
+        id: check-post
+        run: |
+          response=$(curl -o /dev/null -s -w "%{http_code}" "${{ env.POST_URL }}")
+          if [ "$response" -eq 200 ]; then
+            echo "Post already exists. Skipping notification."
+            echo "POST_EXISTS=true" >> $GITHUB_ENV
+          else
+            echo "POST_EXISTS=false" >> $GITHUB_ENV
+          fi
+
       - name: Send Line Message
         if: steps.changed-files.outputs.any_changed == 'true'
         run: |
