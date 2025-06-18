@@ -137,10 +137,10 @@ php artisan make:filament-settings-page ManageGeneras GeneralSettings
 這樣會在 `app/Filament/Pages` 下產生一個 `ManageGenerals.php`，確認 $settings 是不是剛剛的 Setting class
 
 ```php
-protected static string $settings = FooterSettings::class;
+protected static string $settings = GeneralSettings::class;
 ```
 
-打在自己的 Resource 裡面，然後在 `form()` 方法裡面新增欄位。
+輸入在自己的 Resource 裡面，然後在 `form()` 方法裡面新增欄位。
 
 ```php
 use Filament\Forms\Components\Repeater;
