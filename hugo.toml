@@ -31,7 +31,7 @@ comments = true
 [params.homeInfoParams]
 Title = "Welcome 👋"
 Content = """
-Tech | Share。
+Tech | Share | News。
 """
 
 # 社交媒體設定（新版寫法）
