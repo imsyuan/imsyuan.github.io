@@ -174,8 +174,12 @@ jobs:
             exit 0
           fi
 
+          echo "Checking if post exists at URL: ${{ env.POST_URL }}"
+
           # 添加 -L 參數讓 curl 自動跟隨重定向
           response=$(curl -L -o /dev/null -s -w "%{http_code}" "${{ env.POST_URL }}")
+          echo "HTTP response code: $response"
+
           if [ "$response" -eq 200 ]; then
             echo "Post already exists. Skipping notification."
             echo "POST_EXISTS=true" >> $GITHUB_ENV
