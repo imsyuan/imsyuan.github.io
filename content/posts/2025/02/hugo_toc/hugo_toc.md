@@ -7,7 +7,7 @@ author = "Steven Chang"
 slug = "hugo_toc"
 archive = ['2025']
 tags = ['hugo', 'blog', 'toc']
-categories = ['Tech']
+categories = ['Hugo']
 cover = { image = '/posts/2025/02/hugo_toc/cover.png', alt = 'Cover Image for toc'}
 +++
 

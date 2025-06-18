@@ -7,7 +7,7 @@ author = 'Steven Chang'
 slug = 'filamentphp_plugin_spative_setting'
 archive = ['2025']
 tags = ['filamentphp', 'spatie', 'setting', 'laravel', 'plugin']
-categories = ['filamentphp', 'laravel']
+categories = ['Filament', 'Laravel']
 cover = { image = '/posts/2025/06/filamentphp_plugin_spative_setting/cover.png', alt = 'Cover Image'}
 +++
 

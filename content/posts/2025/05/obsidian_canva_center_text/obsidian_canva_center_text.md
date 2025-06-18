@@ -7,7 +7,7 @@ author = 'Steven Chang'
 slug = 'obsidian_canva_center_text'
 archive = ['2025']
 tags = ['obsidian', 'canva', 'center text']
-categories = ['obsidian']
+categories = ['Obsidian']
 cover = { image = '/posts/2025/05/obsidian_canva_center_text/cover.png', alt = 'Cover Image'}
 +++
 
