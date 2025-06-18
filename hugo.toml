@@ -25,10 +25,7 @@ ShowRssButtonInSectionTermList = true
 ShowToc = true
 tocOpen = true
 disqusShortname = "steven-changs-blog"
-
-[services]
-    [services.disqus]
-        shortname = "steven-changs-blog"
+comments = true
 
 # 首頁設定
 [params.homeInfoParams]
