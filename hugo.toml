@@ -26,6 +26,10 @@ ShowToc = true
 tocOpen = true
 disqusShortname = "steven-changs-blog"
 
+[services]
+    [services.disqus]
+        shortname = "steven-changs-blog"
+
 # 首頁設定
 [params.homeInfoParams]
 Title = "Welcome 👋"
