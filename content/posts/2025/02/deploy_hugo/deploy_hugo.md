@@ -7,7 +7,7 @@ title = '使用 Hugo 架設 Blog'
 slug = 'hugo-deploy'
 archive = ['2025']
 tags = ['hugo', 'blog']
-categories = ['Tech']
+categories = ['Tech', 'Hugo']
 cover = { image = '/posts/2025/02/deploy_hugo/cover.png', alt = 'Cover Image'}
 +++
 

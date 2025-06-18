@@ -7,7 +7,7 @@ author = 'Steven Chang'
 slug = 'hugo_comments_disqus_install'
 archive = ['2025']
 tags = ['hugo', 'disqus', 'comments']
-categories = ['hugo']
+categories = ['Hugo']
 cover = { image = '/posts/2025/06/hugo_comments_disqus_install/cover.png', alt = 'Cover Image'}
 +++
 

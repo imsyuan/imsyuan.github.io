@@ -7,7 +7,7 @@ author = 'Steven Chang'
 slug = 'mermaid_to_drawio'
 archive = ['2025']
 tags = ['drawio', 'mermaid', 'ermode', 'AI', 'GPT']
-categories = ['drawio']
+categories = ['Drawio']
 cover = { image = '/posts/2025/03/mermaid_to_drawio/cover.png', alt = 'Cover Image'}
 +++
 
