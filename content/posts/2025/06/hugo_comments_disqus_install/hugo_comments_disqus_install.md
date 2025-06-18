@@ -1,6 +1,6 @@
 +++
 date = '2025-06-18T22:41:02+08:00'
-draft = true
+draft = false
 title = '如何在 Hugo 中安裝 Disqus 系統，以 PaperMod 主題為例'
 description = ''
 author = 'Steven Chang'
