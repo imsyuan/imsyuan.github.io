@@ -191,7 +191,7 @@ jobs:
 #            exit 1
 #          fi
       - name: Send Line Message
-        if: steps.changed-files.outputs.any_changed == 'true' && env.POST_EXISTS == 'false'
+        if: steps.changed-files.outputs.any_changed == 'true'
         run: |
           message='{
             "type": "flex",
@@ -251,7 +251,7 @@ jobs:
             }"
 
       - name: Send Discord Message
-        if: steps.changed-files.outputs.any_changed == 'true' && env.POST_EXISTS == 'false'
+        if: steps.changed-files.outputs.any_changed == 'true'
         run: |
           message="**新文章發布：${{ env.POST_TITLE }}**\n\n閱讀文章：[點擊這裡](${{ env.POST_URL }})"
 
