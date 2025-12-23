@@ -165,31 +165,31 @@ jobs:
             fi
           done
 
-      - name: Check if Post Already Exists
-        id: check-post
-        run: |
-          if [ -z "${{ env.POST_URL }}" ]; then
-            echo "POST_URL is not set or empty. Skipping notification."
-            echo "POST_EXISTS=false" >> $GITHUB_ENV
-            exit 0
-          fi
-
-          echo "Checking if post exists at URL: ${{ env.POST_URL }}"
-
-          # 添加 -L 參數讓 curl 自動跟隨重定向
-          response=$(curl -L -o /dev/null -s -w "%{http_code}" "${{ env.POST_URL }}")
-          echo "HTTP response code: $response"
-
-          if [ "$response" -eq 200 ]; then
-            echo "Post already exists. Skipping notification."
-            echo "POST_EXISTS=true" >> $GITHUB_ENV
-          elif [ "$response" -eq 404 ]; then
-            echo "Post does not exist. Proceeding with notification."
-            echo "POST_EXISTS=false" >> $GITHUB_ENV
-          else
-            echo "Unexpected HTTP response: $response"
-            exit 1
-          fi
+#      - name: Check if Post Already Exists
+#        id: check-post
+#        run: |
+#          if [ -z "${{ env.POST_URL }}" ]; then
+#            echo "POST_URL is not set or empty. Skipping notification."
+#            echo "POST_EXISTS=false" >> $GITHUB_ENV
+#            exit 0
+#          fi
+#
+#          echo "Checking if post exists at URL: ${{ env.POST_URL }}"
+#
+#          # 添加 -L 參數讓 curl 自動跟隨重定向
+#          response=$(curl -L -o /dev/null -s -w "%{http_code}" "${{ env.POST_URL }}")
+#          echo "HTTP response code: $response"
+#
+#          if [ "$response" -eq 200 ]; then
+#            echo "Post already exists. Skipping notification."
+#            echo "POST_EXISTS=true" >> $GITHUB_ENV
+#          elif [ "$response" -eq 404 ]; then
+#            echo "Post does not exist. Proceeding with notification."
+#            echo "POST_EXISTS=false" >> $GITHUB_ENV
+#          else
+#            echo "Unexpected HTTP response: $response"
+#            exit 1
+#          fi
       - name: Send Line Message
         if: steps.changed-files.outputs.any_changed == 'true' && env.POST_EXISTS == 'false'
         run: |
